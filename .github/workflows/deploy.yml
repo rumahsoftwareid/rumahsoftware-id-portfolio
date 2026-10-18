@@ -25,7 +25,12 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          # 20 broke `npm run test`: jsdom 30's undici dependency crashes on
+          # import (`decompress.js`, Cannot read properties of undefined
+          # (reading 'bind')) on that Node line -- confirmed by a real CI
+          # run. 24 is what this project was built and verified against
+          # locally and is known to work.
+          node-version: 24
           cache: npm
 
       - run: npm ci
