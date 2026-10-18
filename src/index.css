@@ -1,0 +1,61 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  /* Dark navy base, cyan/turquoise accent -- the one palette this site
+     uses (brief calls for dark navy + cyan/turquoise, not a light theme). */
+  --color-navy-950: #050a14;
+  --color-navy-900: #0a1120;
+  --color-navy-800: #111a2e;
+  --color-navy-700: #1a2740;
+  --color-navy-600: #26385a;
+  --color-ink-100: #eef4fb;
+  --color-ink-300: #aebccf;
+  --color-ink-500: #7788a3;
+  --color-cyan-400: #2dd4e8;
+  --color-cyan-500: #22c2d6;
+  --color-cyan-600: #14a3b8;
+}
+
+html {
+  scroll-behavior: smooth;
+  color-scheme: dark;
+}
+
+body {
+  background-color: var(--color-navy-950);
+  color: var(--color-ink-100);
+  font-family: var(--font-sans);
+}
+
+/* Respect reduced-motion before anything else can animate. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Visible keyboard-focus ring everywhere, consistent with the accent color
+   (WCAG 2.4.7) -- Tailwind's reset removes the default outline, this is the
+   replacement, not an extra. */
+:focus-visible {
+  outline: 2px solid var(--color-cyan-400);
+  outline-offset: 2px;
+}
+
+.text-gradient {
+  background: linear-gradient(90deg, var(--color-cyan-400), var(--color-ink-100) 85%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
